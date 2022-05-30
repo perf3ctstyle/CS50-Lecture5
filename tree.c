@@ -14,6 +14,7 @@ typedef struct node {
 
 void free_tree(node *root);
 void print_tree(node *root);
+bool search(node *root, int number);
 
 int main(void) {
     node *tree = NULL;
@@ -53,6 +54,10 @@ int main(void) {
 
     tree->right = n;
 
+    bool isThreePresent = search(tree, 3);
+    bool isFourPresent = search(tree, 4);
+    printf("Is 3 present: %i\nIs 4 present: %i\n", isThreePresent, isFourPresent);
+
     print_tree(tree);
     free_tree(tree);
 }
@@ -75,4 +80,16 @@ void free_tree(node *root) {
     free_tree(root->left);
     free_tree(root->right);
     free(root);
+}
+
+bool search(node *root, int number) {
+    if (root == NULL) {
+        return false;
+    } else if (number < root->number) {
+        return search(root->left, number);
+    } else if (number > root->number) {
+        return search(root->right, number);
+    } else {
+        return true;
+    }
 }

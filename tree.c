@@ -12,6 +12,9 @@ typedef struct node {
     struct node *right;
 } node;
 
+void free_tree(node *root);
+void print_tree(node *root);
+
 int main(void) {
     node *tree = NULL;
 
@@ -49,4 +52,27 @@ int main(void) {
     n->right = NULL;
 
     tree->right = n;
+
+    print_tree(tree);
+    free_tree(tree);
+}
+
+void print_tree(node *root) {
+    if (root == NULL) {
+        return;
+    }
+
+    print_tree(root->left);
+    printf("%i ", root->number);
+    print_tree(root->right);
+}
+
+void free_tree(node *root) {
+    if (root == NULL) {
+        return;
+    }
+
+    free_tree(root->left);
+    free_tree(root->right);
+    free(root);
 }

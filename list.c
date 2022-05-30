@@ -40,6 +40,16 @@ int main(void) {
     }
     n->number = 3;
     n->next = NULL;
-    
+
     list->next->next = n;
+
+    for (node *tmp = list; tmp != NULL; tmp = tmp->next) {
+        printf("%i ", tmp->number);
+    }
+
+    while (list != NULL) {
+        node *tmp = list->next;
+        free(list);
+        list = tmp;
+    }
 }
